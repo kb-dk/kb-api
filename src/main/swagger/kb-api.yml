@@ -6,17 +6,16 @@ info:
     name: Apache 2.0
 servers:
   - url: https://kb.dk/api
+basePath: /v1
 paths:
   /hello:
     get:
-      summary: Receive a Hello World message
+      summary: Request a Hello World message
       operationId: getHello
-      tags:
-        - pets
       parameters:
-        - name: alternateWorld
+        - name: alternateHello
           in: query
-          description: Optional alternative to World in the reply
+          description: Optional alternative to using the word 'Hello' in the reply
           required: false
           schema:
             type: string

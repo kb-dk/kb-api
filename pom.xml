@@ -51,15 +51,15 @@
     </profiles>
 
     <developers>
-      <developer>
-        <name>Toke Eskildsen</name>
-        <email>toes@kb.dk</email>
-        <organization>kb</organization>
-        <organizationUrl>http://kb.dk</organizationUrl>
-        <roles>
-          <role>Developer</role>
-        </roles>
-      </developer>
+        <developer>
+            <name>Toke Eskildsen</name>
+            <email>toes@kb.dk</email>
+            <organization>kb</organization>
+            <organizationUrl>http://kb.dk</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <dependencies>
@@ -102,43 +102,69 @@
             <version>3.3.4</version>
         </dependency>
         <!-- Logging dependencies -->
-         <dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.29</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.slf4j</groupId>
-	        <artifactId>jul-to-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.29</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.slf4j</groupId>
-	        <artifactId>log4j-over-slf4j</artifactId>
-	        <version>1.7.29</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.slf4j</groupId>
-	        <artifactId>jcl-over-slf4j</artifactId>
-	        <version>1.7.29</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>ch.qos.logback</groupId>
-	        <artifactId>logback-classic</artifactId>
-	        <version>1.2.3</version>
-	    </dependency>
-	    
-	    <dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.29</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.29</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.5.2</version>
             <scope>test</scope>
-        </dependency> 
-	    
+        </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
+            <!-- https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen -->
+            <!-- TODO: Get this to work -->
+            <!--<plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen</artifactId>
+                <version>3.0.14</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>-->
+                            <!-- https://github.com/swagger-api/swagger-codegen/tree/3.0.0/modules/swagger-codegen-maven-plugin -->
+            <!--
+                            <inputSpec>src/main/swagger/kb-api.yml</inputSpec>
+                            <language>java</language>
+                            <configOptions>
+                                <sourceFolder>src/gen/java/main</sourceFolder>
+                            </configOptions>-->
+                            <!-- https://github.com/swagger-api/swagger-codegen/releases/tag/v3.0.14 -->
+            <!--
+                            <library>jaxrs-cxf</library>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+                -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

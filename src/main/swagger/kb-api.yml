@@ -28,6 +28,7 @@ paths:
                 $ref: "#/components/schemas/HelloReply"
 components:
   schemas:
+  # https://swagger.io/specification/#schemaObject
     HelloReply:
       type: object
       required:
@@ -35,6 +36,7 @@ components:
       properties:
         message:
           type: string
+          description: Greeting from the API
     Error:
       type: object
       required:

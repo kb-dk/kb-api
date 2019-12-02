@@ -1,0 +1,49 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: KB API
+  license:
+    name: Apache 2.0
+servers:
+  - url: https://kb.dk/api
+paths:
+  /hello:
+    get:
+      summary: Receive a Hello World message
+      operationId: getHello
+      tags:
+        - pets
+      parameters:
+        - name: alternateWorld
+          in: query
+          description: Optional alternative to World in the reply
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A JSON structure containing a Hello World message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HelloReply"
+components:
+  schemas:
+    HelloReply:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

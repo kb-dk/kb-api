@@ -13,7 +13,7 @@ Adapted from
 https://github.com/swagger-api/swagger-codegen/wiki/Server-stub-generator-HOWTO#java-jax-rs-apache-cxf-2--3
 (execute from the `kb-api`-folder)
 
-Build Swagger codegen:
+ 1: Build Swagger codegen:  
 ```
 pushd .. 
 git clone https://github.com/swagger-api/swagger-codegen
@@ -23,15 +23,20 @@ mvn package
 popd
 ```
 
-Use Swagger codegen:
+2: Use Swagger codegen:
+   
+   
 ```
 java -jar ../swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate \
+  --api-package dk.kb.api \
+  --model-package dk.kb.api.model \
   -i src/main/swagger/kb-api.yml \
-  -l jaxrs-cxf \
-  -o swagger_gen
-
+  -l jaxrs-cxf
 ```
 
-## Relevant links
+This will *not* overwrite the implementation classes! Only the `gen`-folder will be updated.
 
+## Relevant links for future investigation
+
+No command line, all maven:
 https://github.com/swagger-api/swagger-samples/tree/samples-3.0/java/java-jersey2

@@ -5,13 +5,68 @@ info:
   license:
     name: Apache 2.0
 servers:
-  - url: https://kb.dk/api
-basePath: /v1
+  - url: https://kb.dk/api/v1
 paths:
+  /get:
+    get:
+      summary: Request a resource available at the Royal Danish Library
+      operationId: getResource
+      parameters:
+        - in: query
+          name: id
+          description: The ID for a resource
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource as binary
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Response if the ID was unknown
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /lookup:
+    get:
+      summary: Request meta data available at the Royal Danish Library
+      operationId: getMetaData
+      parameters:
+        - in: query
+          name: ids
+          description: One or more IDs for meta data records
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+            minItems: 1
+        - in: query
+          name: format
+          description: Optional delivery format for the meta data
+          required: false
+          schema:
+            type: string
+            enum: [json]
+            default: json
+      responses:
+        '200':
+          description: A list of [id, json] pairs with the requested IDs and their meta data. IDs which could not be resolved are removed from the list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdMetaPairs'
   /hello:
     get:
-      summary: Request a Hello World message
-      operationId: getHello
+      summary: Request a Hello World message, for testing purposes
+      operationId: getGreeting
       parameters:
         - name: alternateHello
           in: query
@@ -19,6 +74,7 @@ paths:
           required: false
           schema:
             type: string
+            default: World
       responses:
         '200':
           description: A JSON structure containing a Hello World message
@@ -29,6 +85,14 @@ paths:
 components:
   schemas:
   # https://swagger.io/specification/#schemaObject
+    IdMetaPairs:
+      type: object
+      properties:
+        id:
+          type: string
+        meta:
+          type: string
+
     HelloReply:
       type: object
       required:

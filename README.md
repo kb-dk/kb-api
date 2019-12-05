@@ -6,6 +6,11 @@ REST API for internal & external use.
 
 Primary entry point for access to digital material at the Royal Danish Library.
 
+## Updating the API
+
+It is easiest to use the [online Swagger editor](https://editor.swagger.io/) with the Swagger YAML from
+`src/main/swagger/kb-api.yml`. It supports contextual parameter suggestions & code completion with `CTRL-space`
+and warns on syntactical errors.
 
 ## How to build
 

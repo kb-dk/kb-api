@@ -39,6 +39,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <!-- Enable forbiddenapis plugin, do disable set to none -->
         <api.check.phase>process-classes</api.check.phase>
+
+        <io.swagger.codegen.v3.version>3.0.10</io.swagger.codegen.v3.version>
+        <io.swagger.codegen.v3.generators.version>1.0.11</io.swagger.codegen.v3.generators.version>
     </properties>
 
     <profiles>
@@ -133,12 +136,55 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.5.2</version>
             <scope>test</scope>
-        </dependency> 
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-generators</artifactId>
+            <version>${io.swagger.codegen.v3.generators.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>${io.swagger.codegen.v3.version}</version>
+        </dependency>
 	    
     </dependencies>
     
     <build>
         <plugins>
+            <plugin>
+                <groupId>io.swagger.codegen.v3</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>${io.swagger.codegen.v3.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/hello-world-open-api.yaml</inputSpec>
+                    <language>java</language>
+                    <generatorName>java</generatorName>
+                    <generateApis>true</generateApis>
+                    <generateModels>true</generateModels>
+                    <generateApiTests>false</generateApiTests>
+                    <generateModelDocumentation>false</generateModelDocumentation>
+                    <generateModelTests>false</generateModelTests>
+                    <modelPackage>dk.kb.api.client.model</modelPackage>
+                    <apiPackage>dk.kb.api.client.api</apiPackage>
+                    <invokerPackage>dk.kb.api.client.invoker</invokerPackage>
+                    <output>${project.basedir}</output>
+                    <cofigOptions>
+                        <dateLibrary>java11</dateLibrary>
+                        <fullJavaUtil>true</fullJavaUtil>
+                        <java11>true</java11>
+                    </cofigOptions>
+                    <library>jaxrs-cxf</library>
+                    <ignoreFileOverride>${project.basedir}/ignore</ignoreFileOverride>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

@@ -39,6 +39,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <!-- Enable forbiddenapis plugin, do disable set to none -->
         <api.check.phase>process-classes</api.check.phase>
+
+        <io.swagger.codegen.v3.version>3.0.10</io.swagger.codegen.v3.version>
+        <io.swagger.codegen.v3.generators.version>1.0.11</io.swagger.codegen.v3.generators.version>
     </properties>
 
     <profiles>
@@ -51,15 +54,15 @@
     </profiles>
 
     <developers>
-        <developer>
-            <name>Toke Eskildsen</name>
-            <email>toes@kb.dk</email>
-            <organization>kb</organization>
-            <organizationUrl>http://kb.dk</organizationUrl>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
+      <developer>
+        <name>Toke Eskildsen</name>
+        <email>toes@kb.dk</email>
+        <organization>kb</organization>
+        <organizationUrl>http://kb.dk</organizationUrl>
+        <roles>
+          <role>Developer</role>
+        </roles>
+      </developer>
     </developers>
 
     <dependencies>
@@ -102,33 +105,33 @@
             <version>3.3.4</version>
         </dependency>
         <!-- Logging dependencies -->
-        <dependency>
+         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
-        <dependency>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>log4j-over-slf4j</artifactId>
+	        <version>1.7.29</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.slf4j</groupId>
+	        <artifactId>jcl-over-slf4j</artifactId>
+	        <version>1.7.29</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>ch.qos.logback</groupId>
+	        <artifactId>logback-classic</artifactId>
+	        <version>1.2.3</version>
+	    </dependency>
+	    
+	    <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.5.2</version>
@@ -143,55 +146,54 @@
             <version>2.0.9</version>
         </dependency>
 
-    </dependencies>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-generators</artifactId>
+            <version>${io.swagger.codegen.v3.generators.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.codegen.v3</groupId>
+            <artifactId>swagger-codegen-maven-plugin</artifactId>
+            <version>${io.swagger.codegen.v3.version}</version>
+        </dependency>
 
+    </dependencies>
+    
     <build>
         <plugins>
-            <!-- https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen -->
-            <!-- TODO: Get this to work -->
-            <!--<plugin>
+            <plugin>
                 <groupId>io.swagger.codegen.v3</groupId>
-                <artifactId>swagger-codegen</artifactId>
-                <version>3.0.14</version>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>${io.swagger.codegen.v3.version}</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-                        <configuration>-->
-            <!-- https://github.com/swagger-api/swagger-codegen/tree/3.0.0/modules/swagger-codegen-maven-plugin -->
-            <!--
-                            <inputSpec>src/main/swagger/kb-api.yml</inputSpec>
-                            <language>java</language>
-                            <configOptions>
-                                <sourceFolder>src/gen/java/main</sourceFolder>
-                            </configOptions>-->
-            <!-- https://github.com/swagger-api/swagger-codegen/releases/tag/v3.0.14 -->
-            <!--
-                            <library>jaxrs-cxf</library>
-                        </configuration>
                     </execution>
                 </executions>
-            </plugin>
-                -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/gen/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <inputSpec>${project.basedir}/src/main/resources/hello-world-open-api.yaml</inputSpec>
+                    <language>java</language>
+                    <generatorName>java</generatorName>
+                    <generateApis>true</generateApis>
+                    <generateModels>true</generateModels>
+                    <generateApiTests>false</generateApiTests>
+                    <generateModelDocumentation>false</generateModelDocumentation>
+                    <generateModelTests>false</generateModelTests>
+                    <modelPackage>dk.kb.api.client.model</modelPackage>
+                    <apiPackage>dk.kb.api.client.api</apiPackage>
+                    <invokerPackage>dk.kb.api.client.invoker</invokerPackage>
+                    <output>${project.basedir}</output>
+                    <cofigOptions>
+                        <dateLibrary>java11</dateLibrary>
+                        <fullJavaUtil>true</fullJavaUtil>
+                        <java11>true</java11>
+                    </cofigOptions>
+                    <library>jaxrs-cxf</library>
+                    <ignoreFileOverride>${project.basedir}/ignore</ignoreFileOverride>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

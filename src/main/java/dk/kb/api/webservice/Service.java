@@ -22,7 +22,8 @@ public class Service {
     public Service() {
         log.info("Initializing service");
     }
-    
+
+    /* Unmodified from the templade webapp. Not related to the Swagger definition! */
     @GET
     @Path("getHello")
     @Produces(MediaType.APPLICATION_JSON)

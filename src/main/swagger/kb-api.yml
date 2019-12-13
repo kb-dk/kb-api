@@ -1,11 +1,11 @@
-openapi: "3.0.0"
+openapi: "3.0.1"
 info:
   version: 1.0.0
-  title: KB API
+  title: 'KB API'
   license:
     name: Apache 2.0
 servers:
-  - url: https://kb.dk/api/v1
+  - url: '/kb-api/api'
 paths:
   /get:
     get:
@@ -86,7 +86,7 @@ components:
   schemas:
   # https://swagger.io/specification/#schemaObject
     IdMetaPairs:
-      type: object
+      type: object Request a resource available at the Royal Danish Library
       properties:
         id:
           type: string

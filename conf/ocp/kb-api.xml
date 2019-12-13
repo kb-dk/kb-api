@@ -1,12 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Context override="true" docBase="/app/tomcat-apps/java-webapp.war">
+<Context override="true" docBase="/app/tomcat-apps/kb-api.war">
 
-    <Environment name="template-logback-config"
+    <Environment name="kb-api-logback-config"
         value="/app/conf/logback.xml"
         type="java.lang.String"
         override="false"/>
-    <Environment name="template-config"
-        value="/app/conf/template.yaml"
+
+    <Environment name="application-config"
+        value="/app/conf/kb-api.yaml"
         type="java.lang.String"
         override="false"/>
 

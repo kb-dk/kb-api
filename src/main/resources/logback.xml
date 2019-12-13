@@ -1,6 +1,6 @@
 <configuration scan="true" scanPeriod="5 minutes">
-    <insertFromJNDI env-entry-name="java:comp/env/template-logback-config" as="logbackConfiguration"/>
+    <insertFromJNDI env-entry-name="java:comp/env/kb-api-logback-config" as="logbackConfiguration"/>
 
     <include file="${logbackConfiguration}"/>
-
+<!--    <include file="file:/home/halh/projects/kb-api/conf/ocp/logback.xml"/>-->
 </configuration>

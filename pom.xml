@@ -8,10 +8,15 @@
         <version>21</version>
     </parent>
 
+    <modules>
+        <module>kb-api-swagger</module>
+        <module>kb-api-ws</module>
+    </modules>
+
     <groupId>dk.kb.api</groupId>
     <artifactId>kb-api</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <repositories>
         <repository>
@@ -41,8 +46,11 @@
         <maven.compiler.target>11</maven.compiler.target>
         <!-- Enable forbiddenapis plugin, do disable set to none -->
         <api.check.phase>process-classes</api.check.phase>
+
+        <io.swagger.core.version>2.1.0</io.swagger.core.version>
         <org.apache.cxf.version>3.3.4</org.apache.cxf.version>
         <swagger-ui.version>3.0.3</swagger-ui.version>
+        <org.slf4j.version>1.7.29</org.slf4j.version>
     </properties>
 
     <profiles>
@@ -65,267 +73,5 @@
             </roles>
         </developer>
     </developers>
-
-    <dependencies>
-        <!-- Apache CXF and servlet stuff -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>${org.apache.cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-client</artifactId>
-            <version>${org.apache.cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${org.apache.cxf.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-rs-service-description</artifactId>
-            <version>${org.apache.cxf.version}</version>
-        </dependency>
-        <!-- Logging dependencies -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.29</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Swagger 3.0 -->
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2</artifactId>
-            <scope>compile</scope>
-            <version>2.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jaxrs</artifactId>
-            <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jsr311-api</artifactId>
-                    <groupId>javax.ws.rs</groupId>
-                </exclusion>
-            </exclusions>
-            <version>1.5.23</version>
-
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-xml-provider</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-        <finalName>kb-api</finalName>
-
-        <plugins>
-            <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>4.2.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/swagger/kb-api.yml</inputSpec>
-                            <generatorName>jaxrs-cxf-extended</generatorName>
-
-                            <modelNameSuffix>Dto</modelNameSuffix>
-                            <generateSupportingFiles>false</generateSupportingFiles>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModelDocumentation>true</generateModelDocumentation>
-
-                            <generateApis>true</generateApis>
-                            <ignoreFileOverride>
-                                ${project.basedir}/.openapi-codegen-ignore
-                            </ignoreFileOverride>
-
-                            <configOptions>
-                                <sourceFolder>src/main/java/</sourceFolder>
-                                <useSwaggerFeature>true</useSwaggerFeature>
-                                <useSwaggerUI>true</useSwaggerUI>
-                                <apiPackage>dk.kb.api</apiPackage>
-                                <modelPackage>dk.kb.model</modelPackage>
-                                <generateOperationBody>true</generateOperationBody>
-                            </configOptions>
-
-                            <output>${project.basedir}</output>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>generate-spec</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/swagger/kb-api.yml</inputSpec>
-                            <generatorName>openapi</generatorName>
-                            <output>
-                                ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}
-                            </output>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!--Download Swagger UI webjar.  -->
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.webjars</groupId>
-                                    <artifactId>swagger-ui</artifactId>
-                                    <version>${swagger-ui.version}</version>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/swagger-ui</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- Replace the OpenAPI specification example URL with the local one. -->
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.3</version>
-                <executions>
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includes>
-                        <!-- Static index html with swagger UI rendering and OAS in JSON format. -->
-                        <include>
-                            ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}/index.html
-                        </include>
-                        <include>
-                            ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}/openapi.json
-                        </include>
-                    </includes>
-                    <regexFlags>
-                        <regexFlag>CASE_INSENSITIVE</regexFlag>
-                        <regexFlag>MULTILINE</regexFlag>
-                    </regexFlags>
-                    <replacements>
-                        <!-- This replacement imports spec json variable into static html page. -->
-                        <replacement>
-                            <token>http://petstore.swagger.io/v2/swagger.json</token>
-                            <value>/kb-api/swagger-ui/openapi.json</value>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                    <!-- Add Swagger UI resources to the war file. -->
-                    <webResources combine.children="append">
-                        <resource>
-                            <directory>
-                                ${project.build.directory}/swagger-ui/META-INF/resources/webjars/swagger-ui/${swagger-ui.version}
-                            </directory>
-                            <includes>
-                                <include>**/*.*</include>
-                            </includes>
-                            <targetPath>swagger-ui</targetPath>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <groups>${test.groups}</groups>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

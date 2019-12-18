@@ -55,7 +55,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/swagger/kb-api.yml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/swagger/${project.parent.name}.yml</inputSpec>
                             <generatorName>jaxrs-cxf-extended</generatorName>
 
                             <modelNameSuffix>Dto</modelNameSuffix>
@@ -86,7 +86,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/swagger/kb-api.yml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/swagger/${project.parent.name}.yml</inputSpec>
                             <generatorName>openapi</generatorName>
                             <output>${project.build.outputDirectory}</output>
                         </configuration>

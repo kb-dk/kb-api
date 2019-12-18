@@ -45,3 +45,33 @@ This will *not* overwrite the implementation classes! Only the `gen`-folder will
 
 No command line, all maven:
 https://github.com/swagger-api/swagger-samples/tree/samples-3.0/java/java-jersey2
+
+## How to build by Maven
+
+Project uses Swagger Codegen with Maven plug-in for OpenAPI 3.0.2 <br>
+```
+<dependency>
+    <groupId>org.openapitools</groupId>
+    <artifactId>openapi-generator-maven-plugin</artifactId>
+    <version>${openapi-generator-version}</version>
+</dependency>
+```
+More information can be found here: <br>
+https://openapi-generator.tech/docs/plugins
+https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-maven-plugin/README.md
+
+## Project structure
+
+Project contains two modules: kb-api-swagger and kb-api-ws. <br>
+Module kb-api-swagger generates server code and APIs specifikation via openapi plugin. <br>
+Module kb-api-ws contains implementation of the interface and responsible for code presentation via Swagger UI.<br>
+yml file used to generate a code must have the same name as project. The file is located src / main / swagger in the kb-api-swagger module.<br>
+
+## Development
+
+http://localhost:8080/kb-api/swagger-ui/index.html
+http://localhost:8080/kb-api/swagger-ui/openapi.json
+http://localhost:8080/kb-api/api/hello
+
+
+

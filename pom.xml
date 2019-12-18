@@ -47,9 +47,8 @@
         <!-- Enable forbiddenapis plugin, do disable set to none -->
         <api.check.phase>process-classes</api.check.phase>
 
-        <io.swagger.core.version>2.1.0</io.swagger.core.version>
         <org.apache.cxf.version>3.3.4</org.apache.cxf.version>
-        <swagger-ui.version>3.0.3</swagger-ui.version>
+        <swagger-ui.version>3.24.3</swagger-ui.version>
         <org.slf4j.version>1.7.29</org.slf4j.version>
     </properties>
 
@@ -74,4 +73,7 @@
         </developer>
     </developers>
 
+    <build>
+        <finalName>kb-api</finalName>
+    </build>
 </project>

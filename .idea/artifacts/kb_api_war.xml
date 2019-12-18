@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="kb-api:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>kb-api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="kb-api.war">
+      <element id="artifact" artifact-name="kb-api:war exploded" />
+    </root>
+  </artifact>
+</component>

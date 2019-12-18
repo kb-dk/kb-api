@@ -1,11 +1,11 @@
-openapi: "3.0.1"
+openapi: 3.0.2
 info:
   version: 1.0.0
-  title: 'KB API'
+  title: KB API
   license:
     name: Apache 2.0
 servers:
-  - url: '/kb-api/api'
+  - url:  /kb-api/api
 paths:
   /get:
     get:
@@ -52,11 +52,14 @@ paths:
           required: false
           schema:
             type: string
-            enum: [json]
+            enum:
+              - json
             default: json
       responses:
         '200':
-          description: A list of [id, json] pairs with the requested IDs and their meta data. IDs which could not be resolved are removed from the list
+          description: >-
+            A list of [id, json] pairs with the requested IDs and their meta
+            data. IDs which could not be resolved are removed from the list
           content:
             application/json:
               schema:
@@ -65,7 +68,7 @@ paths:
                   $ref: '#/components/schemas/IdMetaPairs'
   /hello:
     get:
-      summary: Request a Hello World message, for testing purposes
+      summary: 'Request a Hello World message, for testing purposes'
       operationId: getGreeting
       parameters:
         - name: alternateHello
@@ -81,18 +84,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/HelloReply"
+                $ref: '#/components/schemas/HelloReply'
 components:
   schemas:
-  # https://swagger.io/specification/#schemaObject
     IdMetaPairs:
-      type: object Request a resource available at the Royal Danish Library
+      type: object
       properties:
         id:
           type: string
         meta:
           type: string
-
     HelloReply:
       type: object
       required:

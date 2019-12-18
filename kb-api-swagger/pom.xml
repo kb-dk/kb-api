@@ -12,44 +12,38 @@
     <packaging>jar</packaging>
     <artifactId>kb-api-swagger</artifactId>
 
-
     <dependencies>
-
-
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-rs-service-description</artifactId>
             <version>${org.apache.cxf.version}</version>
         </dependency>
 
-
+        <!-- Bruges ikke indtil videre pga. openapitool-->
         <!-- Swagger 3.0 -->
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2</artifactId>
-            <scope>compile</scope>
-            <version>${io.swagger.core.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.swagger.core.v3</groupId>-->
+<!--            <artifactId>swagger-jaxrs2</artifactId>-->
+<!--            <scope>compile</scope>-->
+<!--            <version>${io.swagger.core.version}</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
-            <version>${io.swagger.core.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.swagger</groupId>-->
+<!--            <artifactId>swagger-jaxrs-servlet-initializer</artifactId>-->
+<!--            <version>1.5.23</version>-->
+<!--        </dependency>-->
 
         <!-- openapitools dependency -->
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-jaxrs</artifactId>
-            <scope>provided</scope>
             <version>1.5.23</version>
         </dependency>
-
 
     </dependencies>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.openapitools</groupId>
@@ -98,17 +92,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-
-
-
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <groups>${test.groups}</groups>
-                </configuration>
             </plugin>
         </plugins>
     </build>

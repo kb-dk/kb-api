@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kb-api.iml" filepath="$PROJECT_DIR$/kb-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kb-api-swagger/kb-api-swagger.iml" filepath="$PROJECT_DIR$/kb-api-swagger/kb-api-swagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kb-api-ws/kb-api-ws.iml" filepath="$PROJECT_DIR$/kb-api-ws/kb-api-ws.iml" />
+    </modules>
+  </component>
+</project>

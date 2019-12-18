@@ -19,7 +19,7 @@
 # You can also negate patterns with an exclamation (!).
 # For example, you can ignore all files in a docs folder with the file extension .md:
 #docs/*.md
-# Then explicitly reverse the ignore rule for a single file:
-#!docs/README.md
 
-src/main/java/dk/kb/api/impl/*
+# Then explicitly reverse the ignore rule for a single file:
+
+#README.md

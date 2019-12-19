@@ -1,12 +1,12 @@
 package dk.kb.api.webservice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Listener to handle the various setups and configuration sanity checks that can be carried out at when the
@@ -27,20 +27,20 @@ public class APIContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            log.info("Initializing Templpate service v{}", getClass().getPackage().getImplementationVersion());
+            log.info("Initializing Template service v{}", getClass().getPackage().getImplementationVersion());
             InitialContext ctx = new InitialContext();
-            String configFile = (String) ctx.lookup("java:/comp/env/template-config");
+            String configFile = (String) ctx.lookup("java:/comp/env/application-config");
             
         } catch (NamingException e) {
             throw new RuntimeException("Failed to lookup settings", e);
         } 
-        log.info("Templpate service initialized.");
+        log.info("Template service initialized.");
     }
 
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        log.debug("Templpate service destroyed");
+        log.debug("Template service destroyed");
     }
 
 }

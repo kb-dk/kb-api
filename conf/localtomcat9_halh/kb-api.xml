@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context override="true" docBase="kb-api.war">
+
+    <Environment name="kb-api-logback-config"
+        value="${user.home}/projects/kb-api/conf/localtomcat9_halh/logback.xml"
+        type="java.lang.String"
+        override="false"/>
+
+    <Environment name="application-config"
+        value="${user.home}/projects/kb-api/conf/kb-api.yaml"
+        type="java.lang.String"
+        override="false"/>
+
+</Context>
+

@@ -3,7 +3,7 @@
   <display-name>KB API Service</display-name>
 
   <servlet>
-    <servlet-name>KB API REST Service</servlet-name>
+    <servlet-name>KB_API_REST_Service</servlet-name>
     <servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
     <init-param>
       <param-name>javax.ws.rs.Application</param-name>
@@ -13,11 +13,14 @@
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>KB API REST Service</servlet-name>
+    <servlet-name>KB_API_REST_Service</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
 
   <listener>
     <listener-class>dk.kb.api.webservice.APIContextListener</listener-class>
   </listener>
+
+
+
 </web-app>

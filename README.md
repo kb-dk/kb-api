@@ -26,7 +26,7 @@ More information can be found here: <br>
 https://openapi-generator.tech/docs/plugins <br>
 https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-maven-plugin/README.md <br>
 
-To build, run the Maven command from the project directory.
+To build, run the Maven command from the project directory: <br>
 ```mvn package```
 
 ## Deployment

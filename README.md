@@ -12,40 +12,6 @@ It is easiest to use the [online Swagger editor](https://editor.swagger.io/) wit
 `src/main/swagger/kb-api.yml`. It supports contextual parameter suggestions & code completion with `CTRL-space`
 and warns on syntactical errors.
 
-## How to build
-
-Adapted from
-https://github.com/swagger-api/swagger-codegen/wiki/Server-stub-generator-HOWTO#java-jax-rs-apache-cxf-2--3
-(execute from the `kb-api`-folder)
-
- 1: Build Swagger codegen:  
-```
-pushd .. 
-git clone https://github.com/swagger-api/swagger-codegen
-cd swagger-codegen
-git checkout 3.0.0
-mvn package
-popd
-```
-
-2: Use Swagger codegen:
-   
-   
-```
-java -jar ../swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate \
-  --api-package dk.kb.api \
-  --model-package dk.kb.api.model \
-  -i src/main/swagger/kb-api.yml \
-  -l jaxrs-cxf
-```
-
-This will *not* overwrite the implementation classes! Only the `gen`-folder will be updated.
-
-## Relevant links for future investigation
-
-No command line, all maven:
-https://github.com/swagger-api/swagger-samples/tree/samples-3.0/java/java-jersey2
-
 ## How to build by Maven
 
 Project uses Swagger Codegen with Maven plug-in for OpenAPI 3.0.2 <br>
@@ -58,7 +24,19 @@ Project uses Swagger Codegen with Maven plug-in for OpenAPI 3.0.2 <br>
 ```
 More information can be found here: <br>
 https://openapi-generator.tech/docs/plugins <br>
-https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-maven-plugin/README.md
+https://github.com/OpenAPITools/openapi-generator/blob/master/modules/openapi-generator-maven-plugin/README.md <br>
+
+To build, run the Maven command from the project directory.
+```mvn package```
+
+## Deployment
+
+The project can be deployed to Tomcat server (local installation required).<br>
+It has been made clear that the project can run in Jetty via Maven. But the challenge with multiple modules project has not been solved yet.<br>
+
+kb-api.xml file must be corrected to point to logback and properties files where they are located on the server. 
+For local tomcat installation, you can deploy kb-api.xml via symlink to tomcat/conf/Catalina/localhost <br>
+
 
 ## Project structure
 

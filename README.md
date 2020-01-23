@@ -32,7 +32,7 @@ To build, run the Maven command from the project directory: <br>
 ## Deployment
 
 The project can be deployed to Tomcat server (local installation required).<br>
-It has been made clear that the project can run in Jetty via Maven. But the challenge with multiple modules project has not been solved yet.<br>
+It has been made clear that the project can be deployed to Jetty using Maven. But the challenge with multiple modules project has not been solved yet.<br>
 
 kb-api.xml file must be corrected to point to logback and properties files where they are located on the server. 
 For local tomcat installation, you can deploy kb-api.xml via symlink to tomcat/conf/Catalina/localhost <br>

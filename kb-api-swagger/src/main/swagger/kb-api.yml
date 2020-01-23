@@ -85,6 +85,137 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HelloReply'
+  /search/{collection}:
+    get:
+      summary: This API returns a resources (metadata) available at the Royal Danish Library
+      operationId: getCollectionByQuery
+      parameters:
+        - name: collection
+          in: path
+          description: A unique identifier for the collections search
+          required: true
+          schema:
+            type: string
+        - name: q
+          in: query
+          description: Query string for solr data records
+          required: true
+          schema:
+            type: string
+            default: ""
+          example: "*:*"
+          allowReserved: true
+        - name: fq
+          in: query
+          description: Filter query. A query string that limits the query results without influencing their scores.
+          required: false
+          schema:
+            type: string
+            default: ""
+          allowReserved: true
+          examples:
+            emptyFilter:
+              summary: Empty filter
+              value: ""
+            oneFilter:
+              summary: Example of a single filter
+              value: "type:text"
+            multipleFilters:
+              summary: Example of a multiple filters
+              value: "type:text  OR author:Ubekendt"
+        - name: sort
+          in: query
+          description: Sort field/direction. The field on which to sort, followed by a space and direction (desc or asc).
+          required: false
+          schema:
+            type: string
+            default: ""
+          allowReserved: true
+          examples:
+            emptySortField:
+              summary: Empty sort field
+              value: ""
+            oneSortField:
+              summary: Example of a single sort field
+              value: "score desc"
+            multipleSortFields:
+              summary: Example of a multiple sort fields
+              value: "score desc, width_pixels asc"
+        - name: start
+          in: query
+          description: Number of leading documents to skip.
+          required: false
+          schema:
+            type: integer
+            default: 0
+          example: 0
+        - name: rows
+          in: query
+          description: Max results per page. This sets the "page size" for paginated search results.
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: fl
+          in: query
+          description: Field List. The list of fields to return in the query results.
+          required: false
+          schema:
+            type: string
+            default: ""
+          allowReserved: true
+          examples:
+            emptyField:
+              summary: Empty single field
+              value: ""
+            oneField:
+              summary: Example of a single field
+              value: "author"
+            multipleFields:
+              summary: Example of a multiple fields
+              value: "author, title"
+        - name: df
+          in: query
+          description: Default field. Used to configure the q and fq parameters. If not specified, the default field is text
+          required: false
+          schema:
+            type: string
+            default: ""
+        - name: wt
+          in: query
+          description: Response writer.
+          required: false
+          schema:
+            type: string
+            default: "json"
+            enum: [json, xml]
+        - name: facet
+          in: query
+          description: Enable faceting
+          required: false
+          schema:
+            type: boolean
+            default: false
+
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                  type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Metadata with the spedified query was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     IdMetaPairs:
@@ -113,3 +244,7 @@ components:
           format: int32
         message:
           type: string
+          
+        
+        
+        

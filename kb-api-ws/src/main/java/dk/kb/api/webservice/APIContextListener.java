@@ -1,5 +1,6 @@
 package dk.kb.api.webservice;
 
+import dk.kb.api.config.KbApiServiceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,13 +28,16 @@ public class APIContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
-            log.info("Initializing Template service v{}", getClass().getPackage().getImplementationVersion());
+            log.info("Initializing kb-api service v{}", getClass().getPackage().getImplementationVersion());
             InitialContext ctx = new InitialContext();
             String configFile = (String) ctx.lookup("java:/comp/env/application-config");
-            
+            KbApiServiceConfig.initialize(configFile);
         } catch (NamingException e) {
             throw new RuntimeException("Failed to lookup settings", e);
-        } 
+        } catch (Exception e) {
+            log.error("failed to initialize service", e);
+            throw new RuntimeException("failed to initialize service", e);
+        }
         log.info("Template service initialized.");
     }
 

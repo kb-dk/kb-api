@@ -1,2 +1,2 @@
 config:
-    key: value
+    kb-api-url: "http://localhost:10007/solr/"

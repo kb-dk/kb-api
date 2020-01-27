@@ -24,7 +24,7 @@ public class ApiServiceImpl  implements DefaultApi {
         rest = new RestUtil(solrUrl);
     }
 
-    public String getCollectionByQuery(String collection, String q, String fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetQuery, String facetField, String facetPrefix) {
+    public String getCollectionByQuery(String collection, String q, String fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         Map<String, String> params = new HashMap<String, String>();
 

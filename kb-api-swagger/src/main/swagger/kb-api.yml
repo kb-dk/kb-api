@@ -196,25 +196,7 @@ paths:
           schema:
             type: boolean
             default: false
-        - name: facet_query
-          in: query
-          description: This parameter allows you to specify an arbitrary query in the Lucene default syntax to generate a facet count.
-          required: false
-          schema:
-            type: string
-            default: ""
-          allowReserved: true
-          examples:
-            emptyFacetQuery:
-              summary: Example of a empty facet query
-              value: ""
-            oneFacetQuery:
-              summary: Example of a single facet query
-              value: "type:text"
-            multipleFacetQuery:
-              summary: Example of a multiple facet query
-              value: ""
-        - name: facet_field
+        - name: facet.field
           in: query
           description: The facet_field parameter identifies a field that should be treated as a facet. To see facet counts from all documents (q=*:*) turn on faceting (facet=true), and specify the field to facet on via the facet.field parameter. If you only want facets, and no document contents, specify rows=0.
           required: false
@@ -231,7 +213,7 @@ paths:
             multipleFacetField:
               summary: Example of a multiple facet field
               value: ""
-        - name: facet_prefix
+        - name: facet.prefix
           in: query
           description: The facet.prefix parameter limits the terms on which to facet to those starting with the given string prefix. This does not limit the query in any way, only the facets that would be returned in response to the query.
           required: false
@@ -245,9 +227,6 @@ paths:
             oneFacetPrefix:
               summary: Example of a single facet prefix
               value: "ad"
-            multipleFacetPrefix:
-              summary: Example of a multiple facet prefix
-              value: ""
       responses:
         '200':
           description: Success

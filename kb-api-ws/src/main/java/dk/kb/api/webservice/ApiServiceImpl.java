@@ -24,6 +24,7 @@ public class ApiServiceImpl  implements DefaultApi {
         rest = new RestUtil(solrUrl);
     }
 
+    //Acts as a proxy to a backing Solr and returns the result directly
     public String getCollectionByQuery(String collection, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         Map<String, String> params = new HashMap<String, String>();

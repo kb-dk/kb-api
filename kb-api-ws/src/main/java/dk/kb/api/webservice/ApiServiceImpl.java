@@ -24,12 +24,16 @@ public class ApiServiceImpl  implements DefaultApi {
         rest = new RestUtil(solrUrl);
     }
 
-    public String getCollectionByQuery(String collection, String q, String fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
+    public String getCollectionByQuery(String collection, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         Map<String, String> params = new HashMap<String, String>();
 
         if(!q.isBlank()) {params.put("q", q);}
-        if(!fq.isBlank()) {params.put("fq", fq);}
+
+        for(int i = 0; i < fq.size(); i++){
+            params.put("fq", fq.get(i));
+        }
+
         if(!sort.isBlank()) {params.put("sort", sort);}
         params.put("start", start.toString());
         params.put("rows", rows.toString());
@@ -38,7 +42,8 @@ public class ApiServiceImpl  implements DefaultApi {
         if(!wt.isBlank()) {params.put("wt", wt);}
         if (facet) {
             params.put("facet", "on");
-            //TODO flere facet parms skal med
+            params.put("facet.field", facetField);
+            params.put("facet.prefix", facetPrefix);
         }
 
         boolean isXml = isXml(wt);

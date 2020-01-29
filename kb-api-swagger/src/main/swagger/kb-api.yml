@@ -107,22 +107,14 @@ paths:
           allowReserved: true
         - name: fq
           in: query
-          description: Filter query. A query string that limits the query results without influencing their scores.
+          description: Filter query. A query string that limits the query results without influencing their scores. Single filter query example - "type:text" or "type:text OR author:Ubekendt" The fq parameter can be specified multiple times in a query.
           required: false
-          schema:
-            type: string
-            default: ""
           allowReserved: true
-          examples:
-            emptyFilter:
-              summary: Empty filter
-              value: ""
-            oneFilter:
-              summary: Example of a single filter
-              value: "type:text"
-            multipleFilters:
-              summary: Example of a multiple filters
-              value: "type:text  OR author:Ubekendt"
+          schema:
+            type: array
+            items:
+              type: string
+          example: [""]
         - name: sort
           in: query
           description: Sort field/direction. The field on which to sort, followed by a space and direction (desc or asc).
@@ -212,7 +204,7 @@ paths:
               value: "type"
             multipleFacetField:
               summary: Example of a multiple facet field
-              value: ""
+              value: "type, author"
         - name: facet.prefix
           in: query
           description: The facet.prefix parameter limits the terms on which to facet to those starting with the given string prefix. This does not limit the query in any way, only the facets that would be returned in response to the query.

@@ -48,11 +48,11 @@ public class RestUtil {
 
         Response resp = target.request(xml ? MediaType.APPLICATION_XML : MediaType.APPLICATION_JSON)
                 .get();
-         /*
-        Hvis man vil læse værdier:
-        List<Map<String, Object>> json = response.readEntity(new GenericType<List<Map<String, Object>>>() {});
-        String id = (String) json.get(0).get("id");
-        */
+        /*
+         * Hvis man vil læse værdier:
+         * List<Map<String, Object>> json = response.readEntity(new GenericType<List<Map<String, Object>>>() {});
+         * String id = (String) json.get(0).get("id");
+         */
         T response = null;
         try {
             if (resp.getStatus() == 200) {

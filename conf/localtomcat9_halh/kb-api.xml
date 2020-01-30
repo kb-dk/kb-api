@@ -5,7 +5,6 @@
         value="${user.home}/projects/kb-api/conf/localtomcat9_halh/logback.xml"
         type="java.lang.String"
         override="false"/>
-
     <Environment name="application-config"
         value="${user.home}/projects/kb-api/conf/kb-api.yaml"
         type="java.lang.String"

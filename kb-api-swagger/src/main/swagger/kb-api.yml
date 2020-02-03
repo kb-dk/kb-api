@@ -85,7 +85,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HelloReply'
-  /search/{collection}:
+  /search/{collection}/{qt}:
     get:
       summary: This API returns a resources (metadata) available at the Royal Danish Library
       operationId: getCollectionByQuery
@@ -96,6 +96,13 @@ paths:
           required: true
           schema:
             type: string
+        - name: qt
+          in: path
+          description: Request handler
+          required: true
+          schema:
+            type: string
+            default: "select"
         - name: q
           in: query
           description: Query string for solr data records
@@ -190,7 +197,7 @@ paths:
             default: false
         - name: facet.field
           in: query
-          description: The facet_field parameter identifies a field that should be treated as a facet. To see facet counts from all documents (q=*:*) turn on faceting (facet=true), and specify the field to facet on via the facet.field parameter. If you only want facets, and no document contents, specify rows=0.
+          description: The facet.field parameter identifies a field that should be treated as a facet. To see facet counts from all documents (q=*:*) turn on faceting (facet=true), and specify the field to facet on via the facet.field parameter. If you only want facets, and no document contents, specify rows=0.
           required: false
           schema:
             type: string

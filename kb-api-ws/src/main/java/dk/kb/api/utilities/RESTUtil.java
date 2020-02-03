@@ -62,6 +62,7 @@ public class RESTUtil {
     }
 
     /**
+     * Executes a REST URL with request path, parameters and response type
      * @param path
      *          Rest request path
      * @param params
@@ -78,6 +79,7 @@ public class RESTUtil {
     }
 
     /**
+     * Executes a REST URL
      * @param path
      *          Rest request path
      * @param params
@@ -96,6 +98,7 @@ public class RESTUtil {
     }
 
     /**
+     * Executes a REST URL
      * @param url
      *          The REST URL.
      * @param path

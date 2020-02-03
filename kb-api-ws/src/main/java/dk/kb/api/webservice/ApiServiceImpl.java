@@ -2,7 +2,7 @@ package dk.kb.api.webservice;
 
 import dk.kb.api.DefaultApi;
 import dk.kb.api.config.KbApiServiceConfig;
-import dk.kb.api.utilities.RestUtil;
+import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
 import dk.kb.model.IdMetaPairsDto;
 import java.io.File;
@@ -10,10 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *  Provides a basic service to perform an API request.
+ */
 public class ApiServiceImpl  implements DefaultApi {
 
-    private static RestUtil rest;
+    private static RESTUtil rest;
 
+    /**
+     * Constructs an instance of this class
+     */
     public ApiServiceImpl(){
         String  solrUrl = null;
         try {
@@ -21,11 +27,42 @@ public class ApiServiceImpl  implements DefaultApi {
         } catch (Exception e) {
             return;
         }
-        rest = new RestUtil(solrUrl);
+        rest = new RESTUtil(solrUrl);
     }
 
-    //Acts as a proxy to a backing Solr and returns the result directly
-    public String getCollectionByQuery(String collection, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
+    /**
+     * Acts as a proxy to a backing Solr and returns the result directly
+     *
+     * @param collection
+     *          A unique identifier for the collections search
+     * @param qt
+     *          Request handler
+     * @param q
+     *          Query string for solr data records
+     * @param fq
+     *          The list containing filter queries
+     * @param sort
+     *          Sort field/direction.
+     * @param start
+     *          Number of leading documents to skip
+     * @param rows
+     *          Max results per page
+     * @param fl
+     *         Comma separated field List
+     * @param df
+     *          Default field
+     * @param wt
+     *          Response writer
+     * @param facet
+     *          <code>true</code> if faceting is enabled
+     * @param facetField
+     *          The facet field parameter
+     * @param facetPrefix
+     *          The facet prefix parameter
+     * @return
+     *          The Solr response in form of String
+     */
+    public String getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         Map<String, String> params = new HashMap<String, String>();
 
@@ -49,7 +86,7 @@ public class ApiServiceImpl  implements DefaultApi {
 
         boolean isXml = isXml(wt);
 
-        String response = rest.get(collection + "/select", params, isXml, String.class);
+        String response = rest.get(collection + "/" + qt, params, isXml, String.class);
 
         return response;
     }

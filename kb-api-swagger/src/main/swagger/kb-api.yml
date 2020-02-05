@@ -7,6 +7,29 @@ info:
 servers:
   - url:  /kb-api/api
 paths:
+  /rest/ping:
+    get:
+      summary: Ping the server to check if the server is reachable.
+      operationId: ping
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+        '406':
+          description: Not Acceptable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /get:
     get:
       summary: Request a resource available at the Royal Danish Library

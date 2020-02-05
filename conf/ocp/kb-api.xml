@@ -1,13 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Context override="true" docBase="${user.home}/services/tomcat-apps/kb-api-ws.war">
+<!--Skal rettes til openshift conf -->
+<Context override="true" docBase="/digisam/tomcat-apps/kb-api-ws.war">
 
     <Environment name="kb-api-logback-config"
-        value="${user.home}/config/logback.xml"
+        value="/digisam/conf/logback.xml"
         type="java.lang.String"
         override="false"/>
 
     <Environment name="application-config"
-        value="${user.home}/config/kb-api.yaml"
+        value="/digisam/conf/kb-api.yaml"
         type="java.lang.String"
         override="false"/>
 

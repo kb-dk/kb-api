@@ -1,5 +1,8 @@
 package dk.kb.api.utilities;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -13,6 +16,7 @@ import java.util.Map;
  * <code>RESTUtil</code> acts as utility class used by REST API system
  */
 public class RESTUtil {
+    static final Logger logger = LoggerFactory.getLogger(RESTUtil.class);
 
     private final String url;
 
@@ -123,6 +127,7 @@ public class RESTUtil {
 
         //Test
         URI uri = target.getUri();
+        logger.info("Get request by URL: {}", uri);
 
         Response resp = target.request(xml ? MediaType.APPLICATION_XML : MediaType.APPLICATION_JSON)
                 .get();
@@ -142,6 +147,15 @@ public class RESTUtil {
             resp.close();
         }
         return response;
+    }
+
+
+    /**
+     *  The ping service is used to check if the server is reachable.
+     * @return
+     */
+    public Response ping(){
+        return Response.ok().entity("Service online").build();
     }
 
     private static WebTarget addParams(WebTarget target, Map<String, String> params) {

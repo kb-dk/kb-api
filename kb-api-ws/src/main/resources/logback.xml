@@ -2,5 +2,5 @@
     <insertFromJNDI env-entry-name="java:comp/env/kb-api-logback-config" as="logbackConfiguration"/>
 
     <include file="${logbackConfiguration}"/>
-<!--    <include file="file:/home/halh/projects/kb-api/conf/ocp/logback.xml"/>-->
-</configuration>
+    <!--  <include file="${user.home}/projects/kb-api/conf/localtomcat9_halh/logback.xml"/>-->
+  </configuration>

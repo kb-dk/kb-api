@@ -5,6 +5,7 @@ import dk.kb.api.config.KbApiServiceConfig;
 import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
 import dk.kb.model.IdMetaPairsDto;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -131,4 +132,10 @@ public class ApiServiceImpl  implements DefaultApi {
     public File getResource(String id) {
         return null;
     }
+
+    @Override
+    public String ping(){
+        return rest.ping().getEntity().toString();
+    }
+
 }

@@ -1,4 +1,4 @@
-package dk.kb.api.errors.error_404;
+package dk.kb.api.errors.error404;
 
 
 import javax.ws.rs.WebApplicationException;

@@ -1,6 +1,6 @@
 package dk.kb.api.utilities;
 
-import dk.kb.api.errors.error400.BadSolRequestException;
+import dk.kb.api.errors.error_400.BadSolRequestException;
 import dk.kb.api.errors.error_404.SolrDataNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -13,7 +13,7 @@
       <param-name>jaxrs.providers</param-name>
 
       <param-value>
-        dk.kb.api.errors.error400.BadSolrRequestExceptionMapper
+        dk.kb.api.errors.error_400.BadSolrRequestExceptionMapper
         dk.kb.api.errors.error_404.SolrDataNotFoundExceptionMapper
         dk.kb.api.errors.GenericExceptionMapper
       </param-value>

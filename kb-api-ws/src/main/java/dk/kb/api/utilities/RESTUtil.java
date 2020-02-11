@@ -1,8 +1,11 @@
 package dk.kb.api.utilities;
 
+import dk.kb.api.errors.error400.BadSolRequestException;
+import dk.kb.api.errors.error_404.SolrDataNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -19,6 +22,11 @@ public class RESTUtil {
     static final Logger logger = LoggerFactory.getLogger(RESTUtil.class);
 
     private final String url;
+
+    public RESTUtil() {
+
+        this.url = "";
+    }
 
     public RESTUtil(String url) {
 
@@ -48,7 +56,7 @@ public class RESTUtil {
      * @return
      *          The HTTP response based on the given response type
      */
-    public <T> T get(String path, Class<T> responseType) {
+    public <T> T get(String path, Class<T> responseType){
         return get(url, path,  null, true, responseType);
     }
 
@@ -61,7 +69,7 @@ public class RESTUtil {
      * @return
      *          The HTTP response in form of String
      */
-    public String get(String path, Map<String, String> params) {
+    public String get(String path, Map<String, String> params){
         return get(url, path,  params, true, String.class);
     }
 
@@ -78,7 +86,7 @@ public class RESTUtil {
      * @return
      *          The HTTP response based on the given response type
      */
-    public <T> T get(String path, Map<String, String> params, Class<T> responseType) {
+    public <T> T get(String path, Map<String, String> params, Class<T> responseType){
         return get(url, path,  params, true, responseType);
     }
 
@@ -97,7 +105,7 @@ public class RESTUtil {
      * @return
      *          The HTTP response based on the given response type
      */
-    public <T> T get(String path, Map<String, String> params,  boolean xml, Class<T> responseType) {
+    public <T> T get(String path, Map<String, String> params,  boolean xml, Class<T> responseType){
         return get(url, path,  params, xml, responseType);
     }
 
@@ -118,7 +126,7 @@ public class RESTUtil {
      * @return
      *          The HTTP response based on the given response type
      */
-    public static <T> T get(String url, String path, Map<String, String> params, boolean xml, Class<T> responseType) {
+    public static <T> T get(String url, String path, Map<String, String> params, boolean xml, Class<T> responseType){
         Client client = ClientBuilder.newBuilder()
                 .build();
 
@@ -130,7 +138,7 @@ public class RESTUtil {
         logger.info("Get request by URL: {}", uri);
 
         Response resp = target.request(xml ? MediaType.APPLICATION_XML : MediaType.APPLICATION_JSON)
-                .get();
+                .get(Response.class);
 
         /**
          * To read values:
@@ -143,16 +151,28 @@ public class RESTUtil {
             if (resp.getStatus() == 200) {
                 response = resp.readEntity(responseType);
             }
-        } finally {
-            resp.close();
+            if (resp.getStatus() == 400) {
+                throw new BadSolRequestException("Bad Request");
+            }
+            if (resp.getStatus() == 404) {
+                throw new SolrDataNotFoundException("Not Found");
+            }
+            if(resp.getStatus() != 400 && resp.getStatus() != 404 && resp.getStatus() != 200){
+                throw new WebApplicationException("API exception");
+            }
+        }
+        finally {
+            if(resp != null){
+                resp.close();
+                }
         }
         return response;
     }
 
-
     /**
      *  The ping service is used to check if the server is reachable.
      * @return
+     *          The OK response if service is online
      */
     public Response ping(){
         return Response.ok().entity("Service online").build();

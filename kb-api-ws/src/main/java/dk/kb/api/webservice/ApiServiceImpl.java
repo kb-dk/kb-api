@@ -6,6 +6,7 @@ import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
 import dk.kb.model.IdMetaPairsDto;
 
+import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ApiServiceImpl  implements DefaultApi {
      * @return
      *          The Solr response in form of String
      */
-    public String getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
+    public Response getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         Map<String, String> params = new HashMap<String, String>();
 
@@ -86,10 +87,10 @@ public class ApiServiceImpl  implements DefaultApi {
         }
 
         boolean isXml = isXml(wt);
-
         String response = rest.get(collection + "/" + qt, params, isXml, String.class);
 
-        return response;
+
+        return Response.status(200).entity(response).build();
     }
 
     private void   putRawQueryParameters(String rawQueryParameters, Map<String, String> params) {

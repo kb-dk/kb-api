@@ -9,6 +9,15 @@
       <param-name>javax.ws.rs.Application</param-name>
       <param-value>dk.kb.api.webservice.APIApplication</param-value>
     </init-param>
+    <init-param>
+      <param-name>jaxrs.providers</param-name>
+
+      <param-value>
+        dk.kb.api.errors.error400.BadSolrRequestExceptionMapper
+        dk.kb.api.errors.error_404.SolrDataNotFoundExceptionMapper
+        dk.kb.api.errors.GenericExceptionMapper
+      </param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
 
@@ -16,6 +25,7 @@
     <servlet-name>KB_API_REST_Service</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+
 
   <listener>
     <listener-class>dk.kb.api.webservice.APIContextListener</listener-class>

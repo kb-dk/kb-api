@@ -1,4 +1,4 @@
-package dk.kb.api.errors.error_400;
+package dk.kb.api.errors.error400;
 
 
 import dk.kb.model.ErrorDto;

@@ -1,6 +1,7 @@
 package dk.kb.api.webservice;
 
-import dk.kb.api.DefaultApi;
+import dk.kb.api.SolrApi;
+import dk.kb.api.TestApi;
 import dk.kb.api.config.KbApiServiceConfig;
 import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  *  Provides a basic service to perform an API request.
  */
-public class ApiServiceImpl  implements DefaultApi {
+public class ApiServiceImpl  implements SolrApi, TestApi {
 
     private static RESTUtil rest;
 

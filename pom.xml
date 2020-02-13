@@ -74,9 +74,7 @@
     </developers>
 
     <build>
-      <!--  <finalName>kb-api</finalName>-->
         <plugins>
-
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -87,12 +85,9 @@
                         <contextPath>/kb-api-ws/</contextPath>
                         <descriptor>${project.basedir}/src/main/webapp/WEB-INF/web.xml</descriptor>
                         <jettyEnvXml>${project.basedir}/target/jetty-res/jetty-env.xml</jettyEnvXml>
-                  <!--      <resourceBases>${project.basedir}/kb-api-ws/target/kb-api-ws-${project.version}/</resourceBases>-->
                     </webApp>
-                    <!--<classesDirectory>${project.basedir}/kb-api-ws/target</classesDirectory>-->
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 </project>

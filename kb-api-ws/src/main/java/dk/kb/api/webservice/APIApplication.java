@@ -1,7 +1,6 @@
 package dk.kb.api.webservice;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-import dk.kb.api.errors.error_404.SolrDataNotFoundExceptionMapper;
 
 import javax.ws.rs.core.Application;
 import java.util.Arrays;

@@ -2,14 +2,24 @@ openapi: 3.0.2
 info:
   version: 1.0.0
   title: KB Rest API
+  description: KB Rest API
   license:
     name: Apache 2.0
 servers:
   - url:  /kb-api/api
-
+    description: "Tomcat server installation"
+  - url:  /kb-api-ws/api
+    description: "Jetty server installation"
+tags:
+  - name: test
+    description: "Test og under udvikling APIs"
+  - name: solr
+    description: "Solr API"
 paths:
   /rest/ping:
     get:
+      tags:
+        - "test"
       summary: Ping the server to check if the server is reachable.
       operationId: ping
       responses:
@@ -33,6 +43,8 @@ paths:
                 $ref: '#/components/schemas/Error'
   /get:
     get:
+      tags:
+        - "test"
       summary: Request a resource available at the Royal Danish Library
       operationId: getResource
       parameters:
@@ -58,6 +70,8 @@ paths:
                 $ref: '#/components/schemas/Error'
   /lookup:
     get:
+      tags:
+        - "test"
       summary: Request meta data available at the Royal Danish Library
       operationId: getMetaData
       parameters:
@@ -92,6 +106,8 @@ paths:
                   $ref: '#/components/schemas/IdMetaPairs'
   /hello:
     get:
+      tags:
+        - "test"
       summary: 'Request a Hello World message, for testing purposes'
       operationId: getGreeting
       parameters:
@@ -111,6 +127,8 @@ paths:
                 $ref: '#/components/schemas/HelloReply'
   /search/{collection}/{qt}:
     get:
+      tags:
+        - "solr"
       summary: This API returns a resources (metadata) available at the Royal Danish Library
       operationId: getCollectionByQuery
       parameters:

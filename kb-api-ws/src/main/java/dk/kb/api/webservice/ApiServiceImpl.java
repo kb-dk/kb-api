@@ -2,12 +2,14 @@ package dk.kb.api.webservice;
 
 import dk.kb.api.SolrApi;
 import dk.kb.api.TestApi;
+
 import dk.kb.api.config.KbApiServiceConfig;
 import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
 import dk.kb.model.IdMetaPairsDto;
 
 import javax.ws.rs.core.Response;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -117,6 +119,7 @@ public class ApiServiceImpl  implements SolrApi, TestApi {
         }
         return isXml;
     }
+
 
     @Override
     public HelloReplyDto getGreeting(String alternateHello) {

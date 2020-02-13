@@ -45,7 +45,7 @@ It is important to use jetty: run-war when starting jetty server. It wraps the a
 
 Project contains two modules: kb-api-swagger and kb-api-ws. <br>
 Module kb-api-swagger generates server code and APIs specifikation via openapi plugin. <br>
-Module kb-api-ws contains implementation of the interface and responsible for code presentation via Swagger UI.<br>
+Module kb-api-ws contains implementation of the incterface and responsible for code presentation via Swagger UI.<br>
 yml file used to generate a code must have the same name as project. The file is located src / main / swagger in the kb-api-swagger module.<br>
 
 ## Development

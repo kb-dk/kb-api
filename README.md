@@ -50,12 +50,12 @@ yml file used to generate a code must have the same name as project. The file is
 
 ## Development
 
-###Jetty
+### Jetty
 http://localhost:8080/kb-api-ws/swagger-ui/index.html <br>
 http://localhost:8080/kb-api-ws/swagger-ui/openapi.json<br>
 http://localhost:8080/kb-api-ws/api/hello<br>
 
-###Tomcat
+### Tomcat
 http://localhost:8080/kb-api/swagger-ui/index.html <br>
 http://localhost:8080/kb-api/swagger-ui/openapi.json<br>
 http://localhost:8080/kb-api/api/hello<br>

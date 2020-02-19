@@ -12,7 +12,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.ws.rs.core.Response;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;

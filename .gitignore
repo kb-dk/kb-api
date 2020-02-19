@@ -37,3 +37,6 @@ target
 .gradle
 build
 
+# Deploy Files #
+deploy2Devel11.sh
+

@@ -7,11 +7,13 @@ import dk.kb.api.config.KbApiServiceConfig;
 import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.HelloReplyDto;
 import dk.kb.model.IdMetaPairsDto;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.ws.rs.core.Response;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,24 +71,25 @@ public class ApiServiceImpl  implements SolrApi, TestApi {
      */
     public Response getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
-        Map<String, String> params = new HashMap<String, String>();
+        List<Pair<String, String>> params = new LinkedList<>();
+        params.add(Pair.of("foo", "bar"));
 
-        if(!q.isBlank()) {params.put("q", q);}
+        if(!q.isBlank()) {params.add(Pair.of("q", q));}
 
         for(int i = 0; i < fq.size(); i++){
-            params.put("fq", fq.get(i));
+            params.add(Pair.of("fq", fq.get(i)));
         }
 
-        if(!sort.isBlank()) {params.put("sort", sort);}
-        params.put("start", start.toString());
-        params.put("rows", rows.toString());
-        if(!fl.isBlank()) {params.put("fl", fl);}
-        if(!df.isBlank()) {params.put("df", df);}
-        if(!wt.isBlank()) {params.put("wt", wt);}
+        if(!sort.isBlank()) {params.add(Pair.of("sort", sort));}
+        params.add(Pair.of("start", start.toString()));
+        params.add(Pair.of("rows", rows.toString()));
+        if(!fl.isBlank()) {params.add(Pair.of("fl", fl));}
+        if(!df.isBlank()) {params.add(Pair.of("df", df));}
+        if(!wt.isBlank()) {params.add(Pair.of("wt", wt));}
         if (facet) {
-            params.put("facet", "on");
-            params.put("facet.field", facetField);
-            params.put("facet.prefix", facetPrefix);
+            params.add(Pair.of("facet", "on"));
+            params.add(Pair.of("facet.field", facetField));
+            params.add(Pair.of("facet.prefix", facetPrefix));
         }
 
         boolean isXml = isXml(wt);

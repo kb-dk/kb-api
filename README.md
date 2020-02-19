@@ -38,7 +38,7 @@ kb-api.xml file must be corrected to point to logback and properties files where
 For local tomcat installation, you can deploy kb-api.xml via symlink to tomcat/conf/Catalina/localhost <br>
 
 The project is configured to run Jetty locally as well (local installation is not required). <br>
-It is important to use jetty: run-war when starting jetty server. It wraps the application in a war file first and deploys to Jetty server afterwards. Jetty is watching the pom.xml file and re-deploying the application as soon as there are changes.
+It is important to use ```jetty: run-war``` when starting jetty server. It wraps the application in a war file first and deploys to Jetty server afterwards. Jetty is watching the pom.xml file and re-deploying the application as soon as there are changes.
 
 
 ## Project structure

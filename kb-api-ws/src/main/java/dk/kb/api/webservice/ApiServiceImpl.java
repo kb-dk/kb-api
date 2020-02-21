@@ -36,6 +36,15 @@ public class ApiServiceImpl  implements SolrApi, TestApi {
         rest = new RESTUtil(solrUrl);
     }
 
+
+    /**
+     * Only for Junit
+     * @param rest
+     */
+    public static void setRest(RESTUtil rest) {
+        ApiServiceImpl.rest = rest;
+    }
+
     /**
      * Acts as a proxy to a backing Solr and returns the result directly
      *
@@ -68,10 +77,10 @@ public class ApiServiceImpl  implements SolrApi, TestApi {
      * @return
      *          The Solr response in form of String
      */
-    public Response getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort, Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
+    public Response getCollectionByQuery(String collection, String qt, String q, List<String> fq, String sort,
+                                         Integer start, Integer rows, String fl, String df, String wt, Boolean facet, String facetField, String facetPrefix) {
 
         List<Pair<String, String>> params = new LinkedList<>();
-        params.add(Pair.of("foo", "bar"));
 
         if(!q.isBlank()) {params.add(Pair.of("q", q));}
 

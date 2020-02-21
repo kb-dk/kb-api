@@ -50,6 +50,7 @@
         <org.apache.cxf.version>3.3.5</org.apache.cxf.version>
         <swagger-ui.version>3.24.3</swagger-ui.version>
         <org.slf4j.version>1.7.29</org.slf4j.version>
+        <org.junit.jupiter>5.5.2</org.junit.jupiter>
     </properties>
 
     <profiles>

@@ -1,5 +1,8 @@
-package dk.kb.api.utilities;
+package dk.kb.api.integration;
 
+import dk.kb.api.errors.error400.BadSolRequestException;
+import dk.kb.api.errors.error404.SolrDataNotFoundException;
+import dk.kb.api.utilities.RESTUtil;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +26,40 @@ public class RestUtilTest {
         return result.contains("\"status\":\"OK\"");
     }
 
-    static boolean testGetByUrlPathParam(){
+    static boolean testGetByUrlPathParamAndStatus200(){
         RESTUtil restUtil = new RESTUtil();
         Map<String, String> params = new HashMap<String, String>();
         params.put("wt", "json");
         params.put("distrib", "true");
         String result = restUtil.get(solrUrl, solrPath, params, true, String.class);
         return result.contains("\"status\":\"OK\"");
+    }
+    static boolean testGetByUrlPathParamAndStatus400(){
+        RESTUtil restUtil = new RESTUtil();
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("wt", "json");
+        params.put("distrib", "!true");
+        String result = "";
+        try {
+            result = restUtil.get(solrUrl, solrPath, params, true, String.class);
+        }catch (BadSolRequestException exception){
+            return result.contains("\"code\":\"400\"");
+        }
+        return false;
+    }
+    static boolean testGetByUrlPathParamAndStatus404(){
+        RESTUtil restUtil = new RESTUtil();
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("wt", "json");
+        params.put("distrib", "true");
+        String badSolrPath = "!ds/admin/ping";
+        String result = "";
+        try {
+            result = restUtil.get(solrUrl, badSolrPath, params, true, String.class);
+        }catch (SolrDataNotFoundException exception){
+            return exception.getMessage().contains("Not Found");
+        }
+        return false;
     }
 
     static boolean testGetByPathParam(){
@@ -58,7 +88,9 @@ public class RestUtilTest {
 
     public static void main(String[] args) {
         logger.info("RESTUtil get(path) is tested: {}", testGetByPath());
-        logger.info("RESTUtil get(url, path, params, xml, responseType) is tested: {}", testGetByUrlPathParam());
+        logger.info("RESTUtil get(url, path, params, xml, responseType) is tested with status 200: {}", testGetByUrlPathParamAndStatus200());
+        logger.info("RESTUtil get(url, path, params, xml, responseType) is tested with status 400: {}", testGetByUrlPathParamAndStatus400());
+        logger.info("RESTUtil get(url, path, params, xml, responseType) is tested with status 404: {}", testGetByUrlPathParamAndStatus404());
         logger.info("RESTUtil get(path, params, xml, responseType) is tested: {}", testGetByPathParam());
         logger.info("RESTUtil get(path, params as list, xml, responseType) is tested: {}", testGetByPathAndListOfPairParam());
     }

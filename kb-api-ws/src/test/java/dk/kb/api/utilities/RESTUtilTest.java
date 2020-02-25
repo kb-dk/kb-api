@@ -21,6 +21,8 @@ import java.util.List;
 @ExtendWith({MockitoExtension.class, MockServerExtension.class})
 @MockServerSettings(ports = {8787, 8888})
 public class RESTUtilTest {
+    public static final String MOCK_SERVER_PATH = "/solr/ds/admin/ping";
+    public static final String API_PATH = "/ds/admin/ping";
     private ClientAndServer mockServer;
 
     @InjectMocks
@@ -43,7 +45,7 @@ public class RESTUtilTest {
         Header header = new Header("Accept", "application/xml");
         mockServer.when(HttpRequest.request()
                 .withMethod("GET")
-                .withPath("/solr/ds/admin/ping")
+                .withPath(MOCK_SERVER_PATH)
                 .withHeaders(header))
                 .respond(HttpResponse.response()
                         .withStatusCode(200)
@@ -56,7 +58,7 @@ public class RESTUtilTest {
         Header header = new Header("Accept", "application/xml");
         mockServer.when(HttpRequest.request()
                 .withMethod("GET")
-                .withPath("/solr/ds/admin/ping")
+                .withPath(MOCK_SERVER_PATH)
                 .withQueryStringParameter("foo", "bar")
                 .withHeaders(header))
                 .respond(HttpResponse.response()
@@ -71,7 +73,7 @@ public class RESTUtilTest {
         Header header = new Header("Accept", "application/xml");
         mockServer.when(HttpRequest.request()
                 .withMethod("GET")
-                .withPath("/solr/ds/admin/ping")
+                .withPath(MOCK_SERVER_PATH)
                 .withHeaders(header))
                 .respond(HttpResponse.response()
                         .withStatusCode(400)
@@ -84,7 +86,7 @@ public class RESTUtilTest {
         mockServer
                 .when(
                         HttpRequest.request()
-                                .withPath("/solr/ds/admin/ping")
+                                .withPath(MOCK_SERVER_PATH)
                 )
                 .error(
                         HttpError.error()
@@ -99,7 +101,7 @@ public class RESTUtilTest {
 
     @Test
     void testGetResponseByPath(){
-        String response = restUtil.get("/ds/admin/ping", String.class);
+        String response = restUtil.get(API_PATH, String.class);
         Assertions.assertTrue(response.contains("OK"));
     }
 
@@ -107,19 +109,19 @@ public class RESTUtilTest {
     void testGetResponseByPathAndParams(){
         List<Pair<String, String>> params = new LinkedList<>();
         params.add(Pair.of("foo", "bar"));
-        String response = restUtil.get("/ds/admin/ping", params, String.class);
+        String response = restUtil.get(API_PATH, params, String.class);
         Assertions.assertTrue(response.contains("OK"));
     }
 
-    @Test()
+    @Test
     void testGetErrorByPathAndParams(){
         createExpectationForWrongOutput(this.mockServer);
-        Assertions.assertThrows(BadSolRequestException.class, () -> {restUtil.get("/ds/admin/ping", String.class);});
+        Assertions.assertThrows(BadSolRequestException.class, () -> {restUtil.get(API_PATH, String.class);});
     }
 
-    @Test()
+    @Test
     void testGetErrorWithBadConnection(){
         createDropConnectionError(this.mockServer);
-        Assertions.assertThrows(IllegalStateException.class, () -> {restUtil.get("/ds/admin/ping", String.class);});
+        Assertions.assertThrows(IllegalStateException.class, () -> {restUtil.get(API_PATH, String.class);});
     }
 }

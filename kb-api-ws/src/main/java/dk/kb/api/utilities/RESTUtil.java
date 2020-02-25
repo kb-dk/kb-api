@@ -154,40 +154,7 @@ public class RESTUtil {
         WebTarget target = client.target(url).path(path);
         target = addParams(target, params);
 
-        //Test
-        URI uri = target.getUri();
-        logger.info("Get request by URL: {}", uri);
-
-        T response = null;
-        Response resp = null;
-        try {
-            resp = target.request(xml ? MediaType.APPLICATION_XML : MediaType.APPLICATION_JSON)
-                    .get(Response.class);
-
-            /**
-             * To read values:
-             * List<Map<String, Object>> json = response.readEntity(new GenericType<List<Map<String, Object>>>() {});
-             * String id = (String) json.get(0).get("id");
-             */
-            if (resp.getStatus() == 200) {
-                response = resp.readEntity(responseType);
-            }
-            if (resp.getStatus() == 400) {
-                throw new BadSolRequestException("Bad Request");
-            }
-            if (resp.getStatus() == 404) {
-                throw new SolrDataNotFoundException("Not Found");
-            }
-            if (resp.getStatus() != 400 && resp.getStatus() != 404 && resp.getStatus() != 200) {
-                throw new WebApplicationException("API exception");
-            }
-        } catch (ProcessingException e) {
-            throw new IllegalStateException("Unable to connect to Solr server: " + e.getMessage());
-        } finally {
-            if (resp != null) {
-                resp.close();
-            }
-        }
+        T response = getResponse(xml, responseType, target);
         return response;
     }
 
@@ -208,7 +175,12 @@ public class RESTUtil {
 
         WebTarget target = client.target(url).path(path);
         target = addParams(target, params);
+        T response = getResponse(xml, responseType, target);
 
+        return response;
+    }
+
+    private static <T> T getResponse(boolean xml, Class<T> responseType, WebTarget target) {
         //Test
         URI uri = target.getUri();
         logger.info("Get request by URL: {}", uri);

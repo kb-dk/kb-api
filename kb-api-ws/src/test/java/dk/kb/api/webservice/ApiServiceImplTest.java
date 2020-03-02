@@ -7,6 +7,7 @@ import dk.kb.api.utilities.RESTUtil;
 import dk.kb.model.ErrorDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,6 +40,7 @@ public class ApiServiceImplTest {
         apiService.setRest(restUtil);
     }
 
+    @Tag("fast")
     @Test
     void testGetCollectionByQueryWith200() {
         String string = "";
@@ -48,6 +50,7 @@ public class ApiServiceImplTest {
         Assertions.assertEquals(200, response.getStatus());
 
     }
+    @Tag("fast")
     @Test
     void testGetCollectionByQueryWith400() {
 
@@ -58,6 +61,7 @@ public class ApiServiceImplTest {
                     0, 10, "fl", "df", "wt", false, "facetField", "facetPrefix");
         });
     }
+    @Tag("fast")
     @Test
     void testGetCollectionByQueryWith404() {
 

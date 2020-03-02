@@ -99,12 +99,14 @@ public class RESTUtilTest {
         mockServer.stop();
     }
 
+    @Tag("fast")
     @Test
     void testGetResponseByPath(){
         String response = restUtil.get(API_PATH, String.class);
         Assertions.assertTrue(response.contains("OK"));
     }
 
+    @Tag("fast")
     @Test
     void testGetResponseByPathAndParams(){
         List<Pair<String, String>> params = new LinkedList<>();
@@ -113,12 +115,14 @@ public class RESTUtilTest {
         Assertions.assertTrue(response.contains("OK"));
     }
 
+    @Tag("fast")
     @Test
     void testGetErrorByPathAndParams(){
         createExpectationForWrongOutput(this.mockServer);
         Assertions.assertThrows(BadSolRequestException.class, () -> {restUtil.get(API_PATH, String.class);});
     }
 
+    @Tag("fast")
     @Test
     void testGetErrorWithBadConnection(){
         createDropConnectionError(this.mockServer);

@@ -94,11 +94,6 @@ public class RESTUtilTest {
                 );
     }
 
-    @AfterEach
-    public void stopServer() {
-        mockServer.stop();
-    }
-
     @Tag("fast")
     @Test
     void testGetResponseByPath(){
